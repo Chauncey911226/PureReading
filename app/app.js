@@ -96,6 +96,16 @@ function renderContent(text) {
           html.push(`<li>${escapeHtml(itemText)}</li>`);
         }
       }
+    } else if (/^!\[.*\]\(.*\)$/.test(t)) {
+      // 图片段：![alt](src) 格式 → 渲染成真实图片
+      if (inList) { html.push('</ul>'); inList = false; }
+      const match = t.match(/^!\[(.*)\]\((.*)\)$/);
+      if (match) {
+        const alt = escapeHtml(match[1] || '图片');
+        const src = escapeHtml(match[2]);
+        // referrerPolicy="no-referrer" 解决防盗链
+        html.push(`<figure class="article-image"><img src="${src}" alt="${alt}" referrerPolicy="no-referrer" loading="lazy"></figure>`);
+      }
     } else {
       if (inList) { html.push('</ul>'); inList = false; }
       // 段落内部的单换行转成 <br>

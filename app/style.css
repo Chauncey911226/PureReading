@@ -339,6 +339,18 @@ body {
   margin: 0 0 var(--space-md);
 }
 
+/* 文章内图片 */
+.article-image {
+  margin: var(--space-md) 0;
+  text-align: center;
+}
+.article-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  display: inline-block;
+}
+
 .reader-content ul,
 .reader-content ol {
   margin: 0 0 var(--space-md);
