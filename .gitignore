@@ -1,0 +1,28 @@
+# 环境变量
+.env
+.env.local
+.env.*.local
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Vercel
+.vercel/
+
+# 系统
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# 参考资源（第三方素材，不推到仓库）
+awesome-design-md-main/
+taste-skill-main/
+ui-ux-pro-max-skill-main/
+ui_sample/

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pure Reading · 长辈也能读得懂</title>
+  <meta name="description" content="把网上复杂的文章，变成3-5句大白话。" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body>
+  <!-- ============ 顶部品牌条（极简） ============ -->
+  <header class="topbar">
+    <a href="./index.html" class="brand" aria-label="Pure Reading 首页">
+      <span class="brand-dot"></span>
+      <span class="brand-name">Pure Reading</span>
+    </a>
+    <div class="topbar-actions">
+      <button id="share-btn-top" class="share-btn-top is-hidden" type="button" aria-label="复制专属链接">
+        复制专属链接
+      </button>
+      <button id="home-btn-top" class="home-btn-top is-hidden" type="button" aria-label="返回首页">
+        返回首页
+      </button>
+    </div>
+  </header>
+
+  <!-- ============ 输入态 ============ -->
+  <main id="view-input" class="view-input">
+    <div class="input-wrap">
+      <p class="input-tag">适老化纯净阅读</p>
+      <h1 class="input-title">把网上的文章，<br />变成长辈也能读懂的大白话</h1>
+      <p class="input-sub">粘贴一个网址，AI 会帮你剥离广告、提炼要点，再用白话讲一遍。</p>
+
+      <form id="url-form" class="url-form" autocomplete="off">
+        <label for="url-input" class="sr-only">请输入网址</label>
+        <input id="url-input" class="url-input" type="url" inputmode="url"
+          placeholder="例如 https://www.gov.cn/zhengce/..." required />
+        <button type="submit" id="submit-btn" class="submit-btn">开始阅读</button>
+      </form>
+
+      <div id="input-error" class="input-error" role="alert" hidden></div>
+
+      <p class="input-tip">提示：直接复制浏览器地址栏的网址粘贴进来就行。</p>
+    </div>
+  </main>
+
+  <!-- ============ 加载态（骨架屏） ============ -->
+  <main id="view-loading" class="view-loading is-hidden">
+    <div class="loading-wrap">
+      <div class="loading-spinner" aria-hidden="true"></div>
+      <p class="loading-text">正在帮您剥离广告、提炼要点…</p>
+      <p class="loading-sub">大约需要 5-10 秒，请稍等</p>
+    </div>
+  </main>
+
+  <!-- ============ 阅读态 ============ -->
+  <main id="view-reader" class="view-reader is-hidden">
+    <article class="reader-article">
+      <p id="reader-source" class="reader-source"></p>
+      <h1 id="reader-title" class="reader-title"></h1>
+      <div id="reader-content" class="reader-content"></div>
+    </article>
+
+    <!-- 右侧贴边浮动 AI 摘要卡（首次默认展开） -->
+    <aside id="side-panel" class="side-panel is-open" aria-label="AI 大白话摘要">
+      <button id="side-panel-toggle" class="side-panel-toggle" type="button" aria-label="收起或展开摘要">
+        <span class="side-panel-handle" aria-hidden="true"></span>
+      </button>
+      <div class="side-panel-inner">
+        <p class="side-panel-tag">AI 大白话摘要</p>
+        <h2 class="side-panel-title">这篇文章在讲什么</h2>
+        <ol id="side-panel-list" class="side-panel-list"></ol>
+        <p class="side-panel-foot">由 Pure Reading 为长辈整理</p>
+      </div>
+    </aside>
+
+  </main>
+
+  <!-- ============ Toast 提示 ============ -->
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="./app.js"></script>
+</body>
+
+</html>

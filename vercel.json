@@ -1,0 +1,14 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [
+    { "source": "/", "destination": "/app/index.html" },
+    { "source": "/style.css", "destination": "/app/style.css" },
+    { "source": "/app.js", "destination": "/app/app.js" }
+  ],
+  "functions": {
+    "api/extract.js": {
+      "memory": 512,
+      "maxDuration": 30
+    }
+  }
+}

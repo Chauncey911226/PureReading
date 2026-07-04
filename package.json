@@ -1,0 +1,18 @@
+{
+  "name": "pure-reading",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Pure Reading - 适老化纯净阅读引擎",
+  "main": "api/extract.js",
+  "scripts": {
+    "dev": "node dev-local.js",
+    "start": "node dev-local.js"
+  },
+  "dependencies": {
+    "@mozilla/readability": "^0.5.0",
+    "jsdom": "^25.0.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

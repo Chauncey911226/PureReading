@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pure Reading - 适老化纯净阅读引擎</title>
+  <meta name="description" content="做长辈看得懂、点不坏的纯净阅读室。帮子女把复杂网页一键转换为安全、易懂的大字号阅读页面。">
+  <style>
+    /* ============================================
+   Pure Reading - Landing Page Styles
+   Design System: Lovable-inspired warm cream
+   Accent: Sage Teal (#3a8f7a)
+   ============================================ */
+
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+
+    :root {
+      --cream: #f7f4ed;
+      --cream-dark: #eceae4;
+      --charcoal: #1c1c1c;
+      --charcoal-83: rgba(28, 28, 28, 0.83);
+      --charcoal-82: rgba(28, 28, 28, 0.82);
+      --charcoal-40: rgba(28, 28, 28, 0.4);
+      --charcoal-08: rgba(28, 28, 28, 0.08);
+      --charcoal-04: rgba(28, 28, 28, 0.04);
+      --muted: #5f5f5d;
+      --off-white: #fcfbf8;
+      --accent: #3a8f7a;
+      --accent-dark: #2d7a68;
+      --accent-light: rgba(58, 143, 122, 0.1);
+      --accent-lighter: rgba(58, 143, 122, 0.06);
+      --danger: #c0392b;
+      --danger-light: rgba(192, 57, 43, 0.08);
+      --section-py: 96px;
+      --section-px: 24px;
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-pill: 9999px;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1)
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale
+    }
+
+    body {
+      font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", system-ui, -apple-system, sans-serif;
+      background-color: var(--cream);
+      color: var(--charcoal);
+      line-height: 1.6;
+      font-size: 16px
+    }
+
+    img {
+      max-width: 100%;
+      display: block
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--section-px)
+    }
+
+    /* Navigation */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(247, 244, 237, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--cream-dark);
+      height: 64px;
+      display: flex;
+      align-items: center
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--section-px);
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between
+    }
+
+    .nav-logo {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -0.5px;
+      color: var(--charcoal);
+      display: flex;
+      align-items: center;
+      gap: 8px
+    }
+
+    .nav-logo .logo-icon {
+      width: 28px;
+      height: 28px;
+      background: var(--accent);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--off-white);
+      font-size: 14px;
+      font-weight: 600
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none
+    }
+
+    .nav-links a {
+      font-size: 15px;
+      color: var(--muted);
+      transition: color 0.2s var(--ease-out)
+    }
+
+    .nav-links a:hover {
+      color: var(--charcoal)
+    }
+
+    .nav-cta {
+      background: var(--charcoal);
+      color: var(--off-white) !important;
+      padding: 8px 20px;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-weight: 500;
+      transition: opacity 0.2s var(--ease-out);
+      box-shadow: rgba(255, 255, 255, 0.2) 0px 0.5px 0px 0px inset, rgba(0, 0, 0, 0.2) 0px 0px 0px 0.5px inset, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px
+    }
+
+    .nav-cta:hover {
+      opacity: 0.85
+    }
+
+    .nav-cta:active {
+      opacity: 0.8
+    }
+
+    .nav-mobile-toggle {
+      display: none;
+      background: none;
+      border: 1px solid var(--cream-dark);
+      border-radius: var(--radius-sm);
+      padding: 6px 10px;
+      cursor: pointer;
+      color: var(--charcoal);
+      font-size: 20px;
+      line-height: 1
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      padding-top: 64px;
+      position: relative;
+      overflow: hidden
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: -20%;
+      right: -10%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, var(--accent-lighter) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none
+    }
+
+    .hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--section-px);
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1
+    }
+
+    .hero-track {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--accent);
+      background: var(--accent-light);
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      margin-bottom: 24px;
+      letter-spacing: 0.02em
+    }
+
+    .hero h1 {
+      font-size: 52px;
+      font-weight: 600;
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      color: var(--charcoal);
+      margin-bottom: 20px
+    }
+
+    .hero h1 .accent {
+      color: var(--accent)
+    }
+
+    .hero-sub {
+      font-size: 18px;
+      line-height: 1.6;
+      color: var(--muted);
+      margin-bottom: 36px;
+      max-width: 480px
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--off-white);
+      padding: 14px 28px;
+      border-radius: var(--radius-sm);
+      font-size: 16px;
+      font-weight: 500;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s var(--ease-out);
+      box-shadow: rgba(255, 255, 255, 0.15) 0px 0.5px 0px 0px inset, rgba(0, 0, 0, 0.15) 0px 0px 0px 0.5px inset, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-dark)
+    }
+
+    .btn-primary:active {
+      transform: scale(0.98)
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--charcoal);
+      padding: 14px 28px;
+      border-radius: var(--radius-sm);
+      font-size: 16px;
+      font-weight: 500;
+      border: 1px solid var(--charcoal-40);
+      cursor: pointer;
+      transition: all 0.2s var(--ease-out)
+    }
+
+    .btn-ghost:hover {
+      background: var(--charcoal-04)
+    }
+
+    .btn-ghost:active {
+      transform: scale(0.98)
+    }
+
+    .hero-visual {
+      position: relative;
+      z-index: 1
+    }
+
+    .hero-phone {
+      background: var(--off-white);
+      border: 1px solid var(--cream-dark);
+      border-radius: var(--radius-lg);
+      padding: 32px 28px;
+      max-width: 420px;
+      margin-left: auto;
+      position: relative
+    }
+
+    .hero-phone-label {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em
+    }
+
+    .hero-phone-summary {
+      background: var(--accent-light);
+      border: 1px solid rgba(58, 143, 122, 0.15);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      margin-bottom: 20px
+    }
+
+    .hero-phone-summary h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent-dark);
+      margin-bottom: 8px
+    }
+
+    .hero-phone-summary p {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--charcoal)
+    }
+
+    .hero-phone-body {
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--charcoal-82)
+    }
+
+    .hero-phone-body p {
+      margin-bottom: 12px
+    }
+
+    .hero-phone-badge {
+      display: inline-block;
+      font-size: 11px;
+      background: var(--accent);
+      color: var(--off-white);
+      padding: 3px 10px;
+      border-radius: var(--radius-pill);
+      margin-top: 12px
+    }
+
+    /* Pain Points */
+    .pain-points {
+      padding: var(--section-py) 0
+    }
+
+    .pain-points .container {
+      max-width: 1200px
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 64px
+    }
+
+    .section-header h2 {
+      font-size: 40px;
+      font-weight: 600;
+      letter-spacing: -1px;
+      line-height: 1.15;
+      color: var(--charcoal);
+      margin-bottom: 16px
+    }
+
+    .section-header p {
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.6
+    }
+
+    .pain-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr;
+      gap: 24px
+    }
+
+    .pain-card {
+      background: var(--off-white);
+      border: 1px solid var(--cream-dark);
+      border-radius: var(--radius-md);
+      padding: 36px 28px;
+      transition: border-color 0.3s var(--ease-out)
+    }
+
+    .pain-card:hover {
+      border-color: var(--charcoal-40)
+    }
+
+    .pain-card.featured {
+      grid-row: span 1;
+      background: var(--charcoal);
+      border-color: transparent;
+      color: var(--off-white)
+    }
+
+    .pain-card.featured .pain-icon {
+      background: rgba(255, 255, 255, 0.12);
+      color: var(--off-white)
+    }
+
+    .pain-card.featured h3 {
+      color: var(--off-white)
+    }
+
+    .pain-card.featured p {
+      color: rgba(255, 255, 255, 0.75)
+    }
+
+    .pain-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-md);
+      background: var(--accent-light);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 20px
+    }
+
+    .pain-card h3 {
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      letter-spacing: -0.3px
+    }
+
+    .pain-card p {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--muted)
+    }
+
+    /* Origin Story */
+    .origin {
+      padding: var(--section-py) 0;
+      background: var(--off-white)
+    }
+
+    .origin-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center
+    }
+
+    .origin-text h2 {
+      font-size: 40px;
+      font-weight: 600;
+      letter-spacing: -1px;
+      line-height: 1.15;
+      margin-bottom: 24px
+    }
+
+    .origin-text p {
+      font-size: 17px;
+      line-height: 1.8;
+      color: var(--muted);
+      margin-bottom: 16px
+    }
+
+    .origin-text p strong {
+      color: var(--charcoal)
+    }
+
+    .origin-visual {
+      position: relative
+    }
+
+    .origin-chat {
+      background: var(--cream);
+      border: 1px solid var(--cream-dark);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      max-width: 440px;
+      margin-left: auto
+    }
+
+    .chat-bubble {
+      padding: 14px 18px;
+      border-radius: var(--radius-md);
+      margin-bottom: 12px;
+      font-size: 15px;
+      line-height: 1.6;
+      max-width: 85%
+    }
+
+    .chat-bubble.child {
+      background: var(--accent);
+      color: var(--off-white);
+      margin-left: auto;
+      border-bottom-right-radius: 4px
+    }
+
+    .chat-bubble.parent {
+      background: var(--off-white);
+      color: var(--charcoal);
+      border-bottom-left-radius: 4px
+    }
+
+    .chat-bubble.parent.struggle {
+      background: var(--danger-light);
+      border: 1px solid rgba(192, 57, 43, 0.15);
+      color: var(--danger)
+    }
+
+    .chat-time {
+      font-size: 12px;
+      color: var(--muted);
+      text-align: center;
+      margin: 16px 0
+    }
+
+    /* Value Proposition */
+    .values {
+      padding: var(--section-py) 0
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px
+    }
+
+    .value-card {
+      border: 1px solid var(--cream-dark);
+      border-radius: var(--radius-lg);
+      padding: 48px 36px;
+      position: relative;
+      overflow: hidden
+    }
+
+    .value-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--accent)
+    }
+
+    .value-card h3 {
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: -0.5px;
+      margin-bottom: 16px
+    }
+
+    .value-card p {
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--muted)
+    }
+
+    .value-card .value-keyword {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--accent);
+      background: var(--accent-light);
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+      margin-bottom: 16px
+    }
+
+    /* Comparison */
+    .comparison {
+      padding: var(--section-py) 0;
+      background: var(--off-white)
+    }
+
+    .comparison-panels {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px
+    }
+
+    .panel {
+      border-radius: var(--radius-lg);
+      padding: 40px 32px;
+      border: 1px solid var(--cream-dark)
+    }
+
+    .panel-before {
+      background: var(--cream);
+      border-color: rgba(192, 57, 43, 0.2)
+    }
+
+    .panel-after {
+      background: var(--accent-light);
+      border-color: rgba(58, 143, 122, 0.2)
+    }
+
+    .panel-label {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 8px
+    }
+
+    .panel-before .panel-label {
+      color: var(--danger)
+    }
+
+    .panel-after .panel-label {
+      color: var(--accent-dark)
+    }
+
+    .panel-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      display: inline-block
+    }
+
+    .panel-before .panel-dot {
+      background: var(--danger)
+    }
+
+    .panel-after .panel-dot {
+      background: var(--accent)
+    }
+
+    .panel-steps {
+      list-style: none
+    }
+
+    .panel-steps li {
+      padding: 14px 0;
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--charcoal-82);
+      border-bottom: 1px solid var(--cream-dark);
+      display: flex;
+      gap: 12px
+    }
+
+    .panel-steps li:last-child {
+      border-bottom: none
+    }
+
+    .step-num {
+      font-size: 13px;
+      font-weight: 600;
+      min-width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 2px
+    }
+
+    .panel-before .step-num {
+      background: var(--danger-light);
+      color: var(--danger)
+    }
+
+    .panel-after .step-num {
+      background: rgba(58, 143, 122, 0.15);
+      color: var(--accent-dark)
+    }
+
+    /* Workflow */
+    .workflow {
+      padding: var(--section-py) 0
+    }
+
+    .workflow-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 64px
+    }
+
+    .workflow-step {
+      text-align: center;
+      position: relative;
+      padding: 32px 20px
+    }
+
+    .workflow-step::after {
+      content: "";
+      position: absolute;
+      top: 52px;
+      right: -12px;
+      width: 24px;
+      height: 2px;
+      background: var(--cream-dark)
+    }
+
+    .workflow-step:last-child::after {
+      display: none
+    }
+
+    .workflow-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--accent-light);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      margin: 0 auto 20px
+    }
+
+    .workflow-step h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      letter-spacing: -0.2px
+    }
+
+    .workflow-step p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--muted)
+    }
+
+    /* Target Users */
+    .target-users {
+      padding: var(--section-py) 0;
+      background: var(--off-white)
+    }
+
+    .users-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 24px;
+      margin-top: 64px
+    }
+
+    .user-card {
+      background: var(--cream);
+      border: 1px solid var(--cream-dark);
+      border-radius: var(--radius-md);
+      padding: 32px 24px;
+      text-align: center
+    }
+
+    .user-avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--accent-light);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin: 0 auto 16px
+    }
+
+    .user-card h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 8px
+    }
+
+    .user-card p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--muted)
+    }
+
+    .users-scenario {
+      margin-top: 48px;
+      background: var(--cream);
+      border: 1px solid var(--cream-dark);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center
+    }
+
+    .scenario-text h3 {
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      letter-spacing: -0.3px
+    }
+
+    .scenario-text p {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--muted)
+    }
+
+    .scenario-flow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap
+    }
+
+    .scenario-flow .flow-item {
+      background: var(--off-white);
+      border: 1px solid var(--cream-dark);
+      border-radius: var(--radius-sm);
+      padding: 10px 16px;
+      font-size: 14px;
+      color: var(--charcoal);
+      white-space: nowrap
+    }
+
+    .scenario-flow .flow-arrow {
+      color: var(--accent);
+      font-size: 18px
+    }
+
+    /* Footer */
+    .footer {
+      padding: 48px 0;
+      border-top: 1px solid var(--cream-dark)
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 12px
+    }
+
+    .footer-logo {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--charcoal)
+    }
+
+    .footer-track {
+      font-size: 13px;
+      color: var(--muted);
+      background: var(--accent-light);
+      padding: 4px 12px;
+      border-radius: var(--radius-pill)
+    }
+
+    .footer-copy {
+      font-size: 13px;
+      color: var(--muted)
+    }
+
+    /* Scroll Reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out)
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0)
+    }
+
+    @media(prefers-reduced-motion:reduce) {
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none
+      }
+
+      html {
+        scroll-behavior: auto
+      }
+    }
+
+    /* Responsive */
+    @media(max-width:1024px) {
+      .hero h1 {
+        font-size: 42px
+      }
+
+      .pain-grid {
+        grid-template-columns: 1fr 1fr
+      }
+
+      .pain-card.featured {
+        grid-column: span 2
+      }
+
+      .workflow-steps {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .workflow-step:nth-child(2)::after {
+        display: none
+      }
+    }
+
+    @media(max-width:768px) {
+      :root {
+        --section-py: 64px
+      }
+
+      .nav-links {
+        display: none
+      }
+
+      .nav-mobile-toggle {
+        display: block
+      }
+
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 64px;
+        left: 0;
+        right: 0;
+        background: var(--cream);
+        border-bottom: 1px solid var(--cream-dark);
+        padding: 16px var(--section-px);
+        gap: 16px
+      }
+
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding-top: 32px
+      }
+
+      .hero h1 {
+        font-size: 36px;
+        letter-spacing: -1px
+      }
+
+      .hero-sub {
+        font-size: 16px
+      }
+
+      .hero-phone {
+        margin: 0 auto
+      }
+
+      .section-header h2 {
+        font-size: 30px
+      }
+
+      .pain-grid {
+        grid-template-columns: 1fr
+      }
+
+      .pain-card.featured {
+        grid-column: span 1
+      }
+
+      .origin-inner {
+        grid-template-columns: 1fr;
+        gap: 40px
+      }
+
+      .origin-chat {
+        margin: 0
+      }
+
+      .values-grid {
+        grid-template-columns: 1fr
+      }
+
+      .comparison-panels {
+        grid-template-columns: 1fr
+      }
+
+      .workflow-steps {
+        grid-template-columns: 1fr
+      }
+
+      .workflow-step::after {
+        display: none
+      }
+
+      .users-grid {
+        grid-template-columns: 1fr
+      }
+
+      .users-scenario {
+        grid-template-columns: 1fr;
+        padding: 28px
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        text-align: center
+      }
+    }
+
+    @media(max-width:480px) {
+      .hero h1 {
+        font-size: 30px
+      }
+
+      .hero-actions {
+        flex-direction: column
+      }
+
+      .btn-primary,
+      .btn-ghost {
+        text-align: center
+      }
+
+      .scenario-flow {
+        flex-direction: column;
+        align-items: flex-start
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <span class="logo-icon">P</span>
+        Pure Reading
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#pain-points">痛点</a></li>
+        <li><a href="#origin">起源</a></li>
+        <li><a href="#comparison">对比</a></li>
+        <li><a href="#workflow">流程</a></li>
+        <li><a href="#users">用户</a></li>
+      </ul>
+      <button class="nav-mobile-toggle" id="navToggle" aria-label="菜单">&#9776;</button>
+    </div>
+  </nav>
+
+  <!-- Section 1: Hero -->
+  <section class="hero" id="hero">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <span class="hero-track">社会服务 · 智慧助老</span>
+        <h1>做长辈<span class="accent">看得懂</span>、<span class="accent">点不坏</span>的纯净阅读室</h1>
+        <p class="hero-sub">子女一键转换复杂网页，长辈安心阅读大字号白话摘要。没有广告弹窗，没有误触陷阱，只有干净易懂的文字。</p>
+        <div class="hero-actions">
+          <button class="btn-ghost"
+            onclick="document.getElementById('pain-points').scrollIntoView({behavior:'smooth',block:'start'})">了解更多</button>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-phone">
+          <div class="hero-phone-label">Pure Reading 安全阅读室</div>
+          <div class="hero-phone-summary">
+            <h3>奶奶级白话摘要</h3>
+            <p>1. 咱们的看病报销比例提高了。<br>2. 以后跨省看病不用提前回社区报备。<br>3. 下个月记得去趟街道办办手续。</p>
+          </div>
+          <div class="hero-phone-body">
+            <p>2026年大病医保报销比例与跨省结算调整细则。根据最新政策，居民大病保险起付线调整为上一年度居民人均可支配收入的25%...</p>
+          </div>
+          <span class="hero-phone-badge">零超链接 · 防误触</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Pain Points -->
+  <section class="pain-points" id="pain-points">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2>长辈上网，不只是看不清</h2>
+        <p>大厂只做了放大镜，没有解决真正的困境。三道数字鸿沟，横亘在长辈和信息之间</p>
+      </div>
+      <div class="pain-grid">
+        <div class="pain-card featured reveal">
+          <div class="pain-icon">&#128064;</div>
+          <h3>看不懂</h3>
+          <p>政策通知、医学科普长文充满晦涩的专业名词，信息密度极大。单纯放大字号无法降低理解门槛，长辈面对3000字的术语依然抓瞎。</p>
+        </div>
+        <div class="pain-card reveal">
+          <div class="pain-icon">&#128065;</div>
+          <h3>看不清</h3>
+          <p>网页内海量广告、诱导性悬浮窗横飞，核心内容被淹没。长辈难以分辨正文和干扰。</p>
+        </div>
+        <div class="pain-card reveal">
+          <div class="pain-icon">&#9888;</div>
+          <h3>不敢点</h3>
+          <p>暗藏的超链接和下载套路让长辈极度害怕"点错"。一次误触下载流氓软件，就足以产生严重的心理防备。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Origin Story -->
+  <section class="origin" id="origin">
+    <div class="container">
+      <div class="origin-inner">
+        <div class="origin-text reveal">
+          <h2>从家庭微信群里的挫败开始</h2>
+          <p>子女经常往家庭微信群里转发重要的政策通知或健康常识。但长辈往往<strong>因为满屏广告弹窗而不敢点击</strong>，或者因为长篇专业术语而无法理解，甚至经常误触下载了流氓软件。</p>
+          <p>我们深刻体会到：面对数字鸿沟，长辈需要的不是一副放大镜，而是一位耐心的<strong>"信息翻译官"</strong>和一间<strong>"绝对安全的阅读室"</strong>。</p>
+        </div>
+        <div class="origin-visual reveal">
+          <div class="origin-chat">
+            <div class="chat-bubble child">妈，这篇医保报销新政策你看看，很重要的！</div>
+            <div class="chat-bubble parent">好的，我点开看看</div>
+            <div class="chat-time">3分钟后</div>
+            <div class="chat-bubble parent struggle">这上面全是广告啊，我不小心点了个东西，手机开始下载什么理财APP了...算了我不看了</div>
+            <div class="chat-bubble child">别怕别怕，我帮你删掉。政策内容你看到了吗？</div>
+            <div class="chat-bubble parent struggle">没看到，字太小了，全是看不懂的词</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Value Proposition -->
+  <section class="values" id="values">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2>技术向善，从家庭温度出发</h2>
+        <p>我们相信，真正的适老化不是放大字号，而是重塑长辈获取信息的方式</p>
+      </div>
+      <div class="values-grid">
+        <div class="value-card reveal">
+          <span class="value-keyword">社会价值</span>
+          <h3>消除数字鸿沟</h3>
+          <p>将高敌意、高度复杂的互联网杂乱信息，重塑为安全、极简、易读的形态。真正实现数字世界的信息平权，让长辈共享智能化红利，不再被信息洪流抛在身后。</p>
+        </div>
+        <div class="value-card reveal">
+          <span class="value-keyword">情感连接</span>
+          <h3>重塑家庭沟通桥梁</h3>
+          <p>降低长辈获取有用资讯的摩擦力，将子女"单向无效转发"转化为"长辈轻松读懂"的闭环。让每一次转发都不再石沉大海，让技术向善充满真正的家庭温度。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Comparison -->
+  <section class="comparison" id="comparison">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2>同一个链接，两种阅读体验</h2>
+        <p>女儿往微信群转发了一篇《2026年大病医保报销比例与跨省结算调整细则》</p>
+      </div>
+      <div class="comparison-panels">
+        <div class="panel panel-before reveal">
+          <div class="panel-label">
+            <span class="panel-dot"></span>
+            裸奔阅读的焦虑
+          </div>
+          <ul class="panel-steps">
+            <li>
+              <span class="step-num">1</span>
+              <span>长辈点开链接，被3个牛皮癣广告弹窗拦截</span>
+            </li>
+            <li>
+              <span class="step-num">2</span>
+              <span>面对3000字的枯燥术语彻底抓瞎</span>
+            </li>
+            <li>
+              <span class="step-num">3</span>
+              <span>试图关闭弹窗时误触悬浮标</span>
+            </li>
+            <li>
+              <span class="step-num">4</span>
+              <span>手机开始自动下载未知理财APP</span>
+            </li>
+            <li>
+              <span class="step-num">5</span>
+              <span>长辈惊慌关闭，产生严重挫败感与防备心</span>
+            </li>
+          </ul>
+        </div>
+        <div class="panel panel-after reveal">
+          <div class="panel-label">
+            <span class="panel-dot"></span>
+            翻译官与安全屋入场
+          </div>
+          <ul class="panel-steps">
+            <li>
+              <span class="step-num">1</span>
+              <span><strong>净网提取</strong> - 精准剥离所有弹窗、广告、侧边栏，仅抽取干净的核心文本，彻底切断误触源头</span>
+            </li>
+            <li>
+              <span class="step-num">2</span>
+              <span><strong>降维翻译</strong> - 大模型将硬核长文重塑为3-5句"奶奶级大白话"挂在顶部，带行动指南</span>
+            </li>
+            <li>
+              <span class="step-num">3</span>
+              <span><strong>重塑交付</strong> - 极致高对比度、超大字号渲染，全页面剥离任何可点击超链接，打造"点不坏阅读室"</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6: Workflow -->
+  <section class="workflow" id="workflow">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2>极简四步，从噪音到纯净</h2>
+        <p>子女只需粘贴一个链接，剩下的交给 Pure Reading</p>
+      </div>
+      <div class="workflow-steps">
+        <div class="workflow-step reveal">
+          <div class="workflow-icon">&#128221;</div>
+          <h3>网址粘贴</h3>
+          <p>子女一键抛出充满广告的原始新闻或文章链接</p>
+        </div>
+        <div class="workflow-step reveal">
+          <div class="workflow-icon">&#128168;</div>
+          <h3>净网提取</h3>
+          <p>秒级剔除全部广告干扰及侧边栏，打回纯净文本</p>
+        </div>
+        <div class="workflow-step reveal">
+          <div class="workflow-icon">&#129302;</div>
+          <h3>降维翻译</h3>
+          <p>AI提炼3-5句极具行动指导意义的长辈核心要点</p>
+        </div>
+        <div class="workflow-step reveal">
+          <div class="workflow-icon">&#128274;</div>
+          <h3>安全交付</h3>
+          <p>生成无超链接、防误触的高对比大字号页面短链</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 7: Target Users & Scenario -->
+  <section class="target-users" id="users">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2>为谁而做</h2>
+        <p>两代人之间的信息桥梁，让每一次转发都不再落空</p>
+      </div>
+      <div class="users-grid">
+        <div class="user-card reveal">
+          <div class="user-avatar">&#128105;</div>
+          <h3>年轻子女</h3>
+          <p>看到有价值的政策或科普，想转发给父母<br>却担心他们看不懂、不敢点</p>
+        </div>
+        <div class="user-card reveal">
+          <div class="user-avatar">&#128116;</div>
+          <h3>中老年人群</h3>
+          <p>想了解医保、养老、防骗等实用信息,<br>却被复杂网页劝退</p>
+        </div>
+        <div class="user-card reveal">
+          <div class="user-avatar">&#129309;</div>
+          <h3>助老志愿者</h3>
+          <p>需要把政策文件和科普材料转化为<br>老人能理解的内容</p>
+        </div>
+      </div>
+      <div class="users-scenario reveal">
+        <div class="scenario-text">
+          <h3>日常使用场景</h3>
+          <p>子女在微信或浏览器中看到有价值但复杂的文章，比如最新医保报销调整、养生防骗科普、政务办事指南，在转发给父母前，先用 Pure Reading 转换，一键生成适老链接发到微信群。</p>
+        </div>
+        <div class="scenario-flow">
+          <span class="flow-item">看到复杂文章</span>
+          <span class="flow-arrow">&#8594;</span>
+          <span class="flow-item">粘贴链接到 Pure Reading</span>
+          <span class="flow-arrow">&#8594;</span>
+          <span class="flow-item">一键生成适老链接</span>
+          <span class="flow-arrow">&#8594;</span>
+          <span class="flow-item">转发微信群</span>
+          <span class="flow-arrow">&#8594;</span>
+          <span class="flow-item">长辈安心阅读</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-left">
+          <span class="footer-logo">Pure Reading</span>
+          <span class="footer-track">社会服务 · 智慧助老</span>
+        </div>
+        <span class="footer-copy">Trae 开发者大赛参赛作品</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      "use strict";
+      var navToggle = document.getElementById("navToggle");
+      var navLinks = document.getElementById("navLinks");
+      if (navToggle && navLinks) {
+        navToggle.addEventListener("click", function () { navLinks.classList.toggle("open") });
+        navLinks.querySelectorAll("a").forEach(function (l) { l.addEventListener("click", function () { navLinks.classList.remove("open") }) });
+      }
+      var revealElements = document.querySelectorAll(".reveal");
+      if ("IntersectionObserver" in window) {
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) { entry.target.classList.add("visible"); observer.unobserve(entry.target) }
+          });
+        }, { threshold: 0.15, rootMargin: "0px 0px -40px 0px" });
+        revealElements.forEach(function (el) { observer.observe(el) });
+      } else {
+        revealElements.forEach(function (el) { el.classList.add("visible") });
+      }
+      document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+        anchor.addEventListener("click", function (e) {
+          var targetId = this.getAttribute("href");
+          if (targetId === "#") return;
+          var target = document.querySelector(targetId);
+          if (target) { e.preventDefault(); window.scrollTo({ top: target.getBoundingClientRect().top + window.pageYOffset - 64, behavior: "smooth" }) }
+        });
+      });
+      var ghostBtn = document.querySelector(".btn-ghost");
+      if (ghostBtn) {
+        ghostBtn.addEventListener("click", function () {
+          var section = document.getElementById("pain-points");
+          if (section) { window.scrollTo({ top: section.getBoundingClientRect().top + window.pageYOffset - 64, behavior: "smooth" }) }
+        });
+      }
+    })();
+  </script>
+</body>
+
+</html>
